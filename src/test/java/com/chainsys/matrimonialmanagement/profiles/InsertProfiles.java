@@ -26,7 +26,7 @@ public class InsertProfiles {
 		System.out.println("Enter country=");
 		p.country=s.nextLine();
 		System.out.println("Enter mobNo=");
-		p.mobNo=s.nextLine();
+		p.mobNo=s.nextLong();
 		System.out.println("Enter Height=");
 		p.height=s.nextDouble();
 		s.nextLine();
