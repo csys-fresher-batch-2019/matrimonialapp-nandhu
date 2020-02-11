@@ -1,10 +1,12 @@
 package com.nandhu.dao;
 
+import java.util.List;
+
 import com.nandhu.impl.MembershipDurationImpl;
 
 public interface MembershipDurationDAO {
 	
-	public String[] getMembershipDetails();
+	public List<MembershipDurationImpl> getMembershipDetails();
 
 	public void saveMembershipDurationDetails(MembershipDurationImpl md);
 	
@@ -12,7 +14,7 @@ public interface MembershipDurationDAO {
 	
 	public void deleteDuration(int memberId);
 	
-	public String[] getRemainingDays(int userId);
-	
+	//public String[] getRemainingDays(int userId);
+	public List<MembershipDurationImpl> getRemainingDays(int userId);
 	public void calculateExpiryDuration(int userId,int mdplanId,int monthValidity);
 }

@@ -1,5 +1,6 @@
 package com.nandhu.profiles;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.nandhu.impl.Logger;
@@ -15,7 +16,10 @@ public class ProfilesOccupation {
 		String g=s.nextLine();
 		Logger.debug("Enter occupation=");
 		String occup1=s.nextLine();
-		//String occups=s.nextLine();
-		p.getOccupation(g,occup1);
+		List<ProfilesImpl> list =p.getOccupation(g,occup1);
+		for (ProfilesImpl pi : list) {
+			System.out.println(pi.toString1());
+		}
+		
 	}
 }

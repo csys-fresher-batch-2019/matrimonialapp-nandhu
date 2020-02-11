@@ -1,5 +1,6 @@
 package com.nandhu.requestdetails;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.nandhu.impl.Logger;
@@ -16,8 +17,10 @@ public class DisplayAcceptorList {
 		
 		Logger.debug("Enter Acceptor Mail ID=");
 		String acceptor=s.nextLine();
-		
-		rs.getAcceptorList(acceptor);
+		List<RequestStatusImpl> list = rs.getAcceptorList(acceptor);
+		for (RequestStatusImpl r : list) {
+			System.out.println(r.toString3());
+		}
 	}
 
 }

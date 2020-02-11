@@ -6,21 +6,14 @@ import java.util.Scanner;
 import com.nandhu.impl.Logger;
 import com.nandhu.impl.ProfilesImpl;
 
-
-public class GenderProfile {
+public class GetFullProfiles {
 
 	public static void main(String[] args) {
-		@SuppressWarnings("resource")
-		Scanner s=new Scanner(System.in);
-		Logger.debug("Enter Gender(M/F)=");
-		String g=s.nextLine();
 		ProfilesImpl p=new ProfilesImpl();
-		List<ProfilesImpl> list = p.getGenderProfile(g);
+		List<ProfilesImpl> list = p.getFullProfile();
 		for (ProfilesImpl pi : list) {
-			System.out.println(pi.toString1());
+			System.out.println(pi.toString());
 		}
-
-		
-	}
+			}
 
 }

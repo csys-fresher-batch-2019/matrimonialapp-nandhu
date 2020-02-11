@@ -1,5 +1,6 @@
 package com.nandhu.profiles;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.nandhu.impl.Logger;
@@ -14,7 +15,10 @@ ProfilesImpl p=new ProfilesImpl();
 Scanner s=new Scanner(System.in);
 Logger.debug("Enter Name:");
 String name=s.nextLine();
-p.getProfile(name);
+List<ProfilesImpl> list = p.getProfile(name);
+for (ProfilesImpl pi : list) {
+	System.out.println(pi.toString1());
+}
 	}
 
 }

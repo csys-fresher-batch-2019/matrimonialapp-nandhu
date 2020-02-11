@@ -1,5 +1,6 @@
 package com.nandhu.profiles;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.nandhu.impl.Logger;
@@ -18,7 +19,10 @@ public class Height {
 		Logger.debug("Enter height=");
 		h=s.nextDouble();
 		ProfilesImpl p=new ProfilesImpl();
-		p.getHeight(h,g);
+		List<ProfilesImpl> list =p.getHeight(h,g);
+		for (ProfilesImpl pi : list) {
+			System.out.println(pi.toString1());
+		}
 	}
 
 }

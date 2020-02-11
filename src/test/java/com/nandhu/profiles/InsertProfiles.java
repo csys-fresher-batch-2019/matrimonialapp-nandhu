@@ -1,6 +1,7 @@
 package com.nandhu.profiles;
 
-import java.time.LocalDate;
+
+
 import java.util.Scanner;
 
 import com.nandhu.impl.Logger;
@@ -13,12 +14,10 @@ public class InsertProfiles {
 		ProfilesImpl p=new ProfilesImpl();
 		@SuppressWarnings("resource")
 		Scanner s=new Scanner(System.in);
-		
 		Logger.debug("Enter user name=");
 		p.setUserName(s.nextLine());
-	
 		Logger.debug("Enter Dob=");
-		p.setDob(LocalDate.parse(s.nextLine()));
+		p.setDob(java.sql.Date.valueOf((s.nextLine())));
 		s.nextLine();
 		Logger.debug("Enter gender(M/F)=");
 		p.setGender(s.nextLine());
@@ -41,17 +40,21 @@ public class InsertProfiles {
 		p.setMail(s.nextLine());
 		Logger.debug("Enter Height=");
 		p.setHeight(s.nextDouble());
+		s.nextLine();
 		Logger.debug("Enter Education=");
 		p.setEducation(s.nextLine());
 		Logger.debug("Enter Occupation=");
 		p.setOccupation(s.nextLine());
 		Logger.debug("Enter Salary=");
 		p.setSalary(s.nextInt());
+		s.nextLine();
 		Logger.debug("Enter Marital Status=");
 		p.setMaritalSts(s.nextLine());
 		Logger.debug("Enter Membership Type(platinum/gold/silver)=");
 		p.setMembershipType(s.nextLine());
 		Logger.debug("Enter Password=");
+		p.setPass(s.nextLine());
+		Logger.debug("Upload picture=");
 		p.setPass(s.nextLine());
 		p.save(p);
 	}

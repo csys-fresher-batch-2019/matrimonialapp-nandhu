@@ -13,11 +13,11 @@ public class ChangePassword {
 		Scanner s=new Scanner(System.in);
 		Logger.debug("Enter User Email:");
 		String userEmail=s.nextLine();
+		Logger.debug("Enter Old password:");
+		String pass=s.nextLine();
 		Logger.debug("Enter new password:");
 		String password=s.nextLine();
-		p.changePassword(userEmail, password);
-		
-
-	}
+		p.changePassword(userEmail,pass,password);
+			}
 
 }

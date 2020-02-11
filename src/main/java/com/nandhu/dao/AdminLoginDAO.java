@@ -4,6 +4,6 @@ package com.nandhu.dao;
 
 	public interface AdminLoginDAO 
 	{
-		public void adminLogin(AdminLoginImpl al);
+		public String adminLogin(AdminLoginImpl al);
 
 	}

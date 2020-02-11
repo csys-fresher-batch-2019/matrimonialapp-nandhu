@@ -13,7 +13,6 @@ public class UpdateStatus {
 		RequestStatusImpl rs=new RequestStatusImpl();
 		@SuppressWarnings("resource")
 		Scanner s=new Scanner(System.in);
-		
 		Logger.debug("Enter Requestor Mail ID=");
 		String requestor=s.nextLine();
 		Logger.debug("Enter Acceptor Mail ID=");
@@ -21,7 +20,6 @@ public class UpdateStatus {
 		Logger.debug("Enter Status=");
 		String status=s.nextLine();
 		rs.updateStatus(requestor,acceptor,status);
-
 	}
 
 }

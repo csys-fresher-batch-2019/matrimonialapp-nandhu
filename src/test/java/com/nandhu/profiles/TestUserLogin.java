@@ -13,11 +13,11 @@ public class TestUserLogin {
 		@SuppressWarnings("resource")
 		Scanner s=new Scanner(System.in);
 		Logger.debug("Enter email:");
-		String email=s.nextLine();
+		String mail=s.nextLine();
 		s.nextLine();
 		Logger.debug("Enter password:");
 		String pass=s.nextLine();
-		p.userLogin(email, pass);
+		p.userLogin(mail,pass);
 	}
 
 }

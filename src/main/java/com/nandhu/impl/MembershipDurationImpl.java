@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.nandhu.dao.MembershipDurationDAO;
 import com.nandhu.util.ConnectionUtil;
@@ -18,7 +20,6 @@ public class MembershipDurationImpl implements MembershipDurationDAO {
 	private int remainingDays;
 	private String userName;
 	private int UserId;
-
 	public int getMemberId() {
 		return memberId;
 	}
@@ -87,31 +88,45 @@ public class MembershipDurationImpl implements MembershipDurationDAO {
 		return LOGGER;
 	}
 
+	
+	
 	@Override
 	public String toString() {
-		return "MembershipDuration [member_id=" + memberId + ", md_user_id=" + mdUserId + ", md_plan_id=" + mdPlanId
-				+ ", expiry_date=" + expiryDate + "]";
+		return "MembershipDurationImpl [memberId=" + memberId + ", mdUserId=" + mdUserId + ", mdPlanId=" + mdPlanId
+				+ ", expiryDate=" + expiryDate + ", monthValidity=" + monthValidity + ", remainingDays=" + remainingDays
+				+ ", userName=" + userName + ", UserId=" + UserId + "]";
 	}
-
-	public String[] getMembershipDetails() {
-		String sql = "select * from membership_duration ";
+	public String toString2() {
+		return "MembershipDurationImpl [memberId=" + memberId + ", mdUserId=" + mdUserId + ", mdPlanId=" + mdPlanId
+				+ ", expiryDate=" + expiryDate + "]";
+	}
+	public String toString1() {
+		return "MembershipDurationImpl [ remainingDays=" + remainingDays
+				+ ", userName=" + userName +"]";
+	}
+	public List<MembershipDurationImpl> getMembershipDetails() {
+		List<MembershipDurationImpl> list = new ArrayList<MembershipDurationImpl>();
+		String sql = "select * from membership_duration";
 		try (Connection con = ConnectionUtil.getConnect();
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {
 			while (rs.next()) {
 				memberId = rs.getInt("member_id");
-				Logger.debug("Member ID=" + memberId);
 				mdUserId = rs.getInt("md_user_id");
-				Logger.debug("User ID=" + mdUserId);
 				mdPlanId = rs.getInt("md_plan_id");
-				Logger.debug("Plan ID=" + mdPlanId);
 				String expiryDate = rs.getString("expiry_date");
-				Logger.debug("Expiry Date=\n" + expiryDate);
+				MembershipDurationImpl m=new MembershipDurationImpl();
+				m.setMemberId(memberId);
+				m.setMdUserId(mdUserId);
+				m.setMdPlanId(mdPlanId);
+				m.setExpiryDate(expiryDate);
+				list.add(m);
+			
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return list;
 	}
 
 	public void saveMembershipDurationDetails(MembershipDurationImpl md) {
@@ -121,6 +136,7 @@ public class MembershipDurationImpl implements MembershipDurationDAO {
 			ps.setInt(2, md.getMdPlanId());
 			int row = ps.executeUpdate();
 			Logger.debug(row);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -138,7 +154,8 @@ public class MembershipDurationImpl implements MembershipDurationDAO {
 		}
 	}
 
-	public String[] getRemainingDays(int userId) {
+	public List<MembershipDurationImpl> getRemainingDays(int userId) {
+		List<MembershipDurationImpl> list = new ArrayList<MembershipDurationImpl>();
 		String sql = "select user_name,((select expiry_date from membership_duration where md_user_id=" + userId
 				+ ")-(select registerd_date from profiles where user_id=" + userId
 				+ "))as remaining_days	from profiles where user_id=" + userId;
@@ -147,33 +164,26 @@ public class MembershipDurationImpl implements MembershipDurationDAO {
 				ResultSet rs = stmt.executeQuery(sql)) {
 			while (rs.next()) {
 				userName = rs.getString("user_name");
-				Logger.debug("User name=" + userName);
 				remainingDays = rs.getInt("remaining_days");
-				Logger.debug("Remaining Days=" + remainingDays);
+				MembershipDurationImpl m=new MembershipDurationImpl();
+m.setUserName(userName);
+m.setRemainingDays(remainingDays);
+list.add(m);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return list;
 	}
 
-	public void calculateExpiryDuration(MembershipDurationImpl md) {
-		try (Connection con = ConnectionUtil.getConnect(); Statement stmt = con.createStatement()) {
-			String sql = "update membership_duration set expiry_date=add_months((select registerd_date from profiles where user_id="
-					+ mdUserId + ")," + monthValidity + ")where md_user_id=" + mdUserId + " and md_plan_id=" + mdPlanId;
-			int row = stmt.executeUpdate(sql);
-			Logger.debug(row);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	
 	public String[] updateExpiryDate(MembershipDurationImpl md) {
 		try (Connection con = ConnectionUtil.getConnect(); Statement stmt = con.createStatement()) {
 			String sql = "update membership_duration set expiry_date=add_months(expiry_date," + monthValidity
 					+ "),md_plan_id=" + mdPlanId + " where md_user_id=" + mdUserId;
 			int row = stmt.executeUpdate(sql);
 			Logger.debug(row);
+			Logger.debug(sql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -186,11 +196,13 @@ public class MembershipDurationImpl implements MembershipDurationDAO {
 					+ userId + ")," + monthValidity + ")where md_user_id=" + userId + " and md_plan_id=" + mdplanId;
 			int row = stmt.executeUpdate(sql);
 			Logger.debug(row);
-
+			Logger.debug(sql);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	
 }
 /*
  * create table membership_duration( member_id number, md_user_id number,

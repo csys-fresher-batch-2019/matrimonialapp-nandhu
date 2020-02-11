@@ -27,22 +27,26 @@ public class AdminLoginImpl {
 		this.password = password;
 	}
 	
-	public void adminLogin(AdminLoginImpl al) {
+	public String adminLogin(AdminLoginImpl al) {
 		String sql = "select user_name,password from login where user_name='"+userName+"' and password='"+password+"'";
+		String msg=null;
 		try(Connection con = ConnectionUtil.getConnect();Statement stmt = con.createStatement();ResultSet rs = stmt.executeQuery(sql))
 		{
 			if (rs.next()) {
 				String userName1 = rs.getString("user_name");
-				//LOGGER.debug("Name="+mail);
 				String password1 = rs.getString("password");
-				//LOGGER.debug("Age="+password);
 				if(userName1.equals(userName)&& password1.equals(password))
 						Logger.debug("Logged In...");
+				msg="success";
+				
 			}	else {
-			Logger.debug("Login Failed...");}
+			Logger.debug("Login Failed...");
+			msg="fail";
+			}return msg;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 		
 	}
 }

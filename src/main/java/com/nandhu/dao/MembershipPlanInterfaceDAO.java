@@ -1,17 +1,16 @@
 package com.nandhu.dao;
 
+import java.util.List;
+
+import com.nandhu.impl.MembershipPlanImpl;
+
 public interface MembershipPlanInterfaceDAO {
 	
-	public String[] getMembershipPlanDetails();
+	public List<MembershipPlanImpl> getMembershipPlanDetails();
 	
 	public void updatePlan(int amount,int planId);
-
-
-	//public void deletePlan(int planId);
 	
-	//public void savePlan(MembershipPlanImpl mp);
-	
-	public String[] getExpiryDateDetails();
+	public List<MembershipPlanImpl> getExpiryDateDetails();
 
 
 }

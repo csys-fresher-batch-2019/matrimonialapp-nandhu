@@ -1,30 +1,27 @@
 package com.nandhu.dao;
 
+import java.util.List;
+
 import com.nandhu.impl.ProfilesImpl;
 
 public interface ProfilesInterfaceDAO {
 	int getTotalCount();
 	
-	public String[] getProfile(String userName);
-	public void changePassword(String userEmail, String userpassword);
+	public List<ProfilesImpl> getProfile(String userName);
+	
+	public void changePassword(String userEmail,String pass,String userpassword);
 
-	//public String[] getFemaleProfile(String gender);
+	public List<ProfilesImpl> getGenderProfile(String gender);
 	
-	public String[] getGenderProfile(String gender);
+	public List<ProfilesImpl> getHeight(double height, String gender);
 	
-	//public String[] getFemaleHeight(double height,String gender);
+	public List<ProfilesImpl> getSalaryDetails(int salary,String gender);
 	
-	public String[] getHeight(double height,String gender);
+	public List<ProfilesImpl> getOccupation(String gender, String occupation);
 	
-	public String[] getSalaryDetails(int salary,String gender);
-	
-	public String[] getOccupation(String gender,String occupation);
-	
-	public String[] getNotInOccupation(String gender,String occupation);
+	public List<ProfilesImpl> getNotInOccupation(String gender, String occupation);
 
-	public String[] getCityProfile(String gender,String city);
-	
-	public String[] getAgeDetails();
+	public List<ProfilesImpl> getCityProfile(String gender,String city);
 	
 	public void save(ProfilesImpl p);
 	
@@ -34,7 +31,11 @@ public interface ProfilesInterfaceDAO {
 
 	public void updateActive(int userId,int active);
 	
-	public void userLogin(String userEmail,String userpassword);
+	public String userLogin(String mail,String pass);
 	
-	public String[] getReligion(String gender,String religion);
-	}
+	public List<ProfilesImpl> getReligion(String gender, String religion);
+	
+	public List<ProfilesImpl> getFullProfile();
+
+	
+}

@@ -1,5 +1,6 @@
 package com.nandhu.profiles;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.nandhu.impl.Logger;
@@ -16,7 +17,11 @@ public class ReligionProfile {
 		String g=s.nextLine();
 		Logger.debug("Enter Religion=");
 		String r=s.nextLine();
-		p.getReligion(g,r);
+		List<ProfilesImpl> list = p.getReligion(g,r);
+		for (ProfilesImpl pi : list) {
+			System.out.println(pi.toString1());
+		}
+		
 	}
 
 }
