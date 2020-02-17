@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 import com.nandhu.impl.Logger;
 import com.nandhu.impl.MembershipDurationImpl;
-
-
 public class RemainigDaysInfo {
 	   @SuppressWarnings("unused")
 	   

@@ -1,10 +1,7 @@
 package com.nandhu.duration;
-
 import java.util.Scanner;
-
 import com.nandhu.impl.Logger;
 import com.nandhu.impl.MembershipDurationImpl;
-
 public class CalculateExpiryMonths {
 	   @SuppressWarnings("unused")
 	private static final Logger LOGGER = Logger.getInstance();
@@ -20,5 +17,4 @@ public class CalculateExpiryMonths {
 		int monthValidity=s.nextInt();
 		md.calculateExpiryDuration(userId,mdplanId,monthValidity);
 	}
-
 }

@@ -276,9 +276,11 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				Date dob = rs.getDate("d_o_b");
 				String gender = rs.getString("gender");
 				String religion = rs.getString("religion");
+				String caste = rs.getString("caste");
 				String country = rs.getString("country");
 				String state = rs.getString("states");
 				String city = rs.getString("city");
+				Long mobNo = rs.getLong("mob_no");
 				Long aadharNo = rs.getLong("aadhar_no");
 				String mail = rs.getString("mail_id");
 				int height = rs.getInt("height");
@@ -292,9 +294,11 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				p.setDob(dob);
 				p.setGender(gender);
 				p.setReligion(religion);
+				p.setCaste(caste);
 				p.setCountry(country);
 				p.setState(state);
 				p.setCity(city);
+				p.setMobNo(mobNo);
 				p.setAadharNo(aadharNo);
 				p.setMail(mail);
 				p.setHeight(height);
@@ -383,13 +387,16 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				ResultSet rs = stmt.executeQuery(sql)) {
 
 			while (rs.next()) {
+				String pic=rs.getString("pic");
 				String user_name = rs.getString("user_name");
 				Date dob = rs.getDate("d_o_b");
 				String gender1 = rs.getString("gender");
 				String religion = rs.getString("religion");
+				String caste = rs.getString("caste");
 				String country = rs.getString("country");
 				String state = rs.getString("states");
 				String city1 = rs.getString("city");
+				Long mobNo = rs.getLong("mob_no");
 				Long aadharNo = rs.getLong("aadhar_no");
 				String mail = rs.getString("mail_id");
 				int height = rs.getInt("height");
@@ -402,9 +409,11 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				p.setDob(dob);
 				p.setGender(gender1);
 				p.setReligion(religion);
+				p.setCaste(caste);
 				p.setCountry(country);
 				p.setState(state);
 				p.setCity(city1);
+				p.setMobNo(mobNo);
 				p.setAadharNo(aadharNo);
 				p.setMail(mail);
 				p.setHeight(height);
@@ -412,6 +421,7 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				p.setOccupation(occupation);
 				p.setSalary(salary);
 				p.setMaritalSts(marital_sts);
+				p.setPic(pic);
 				list.add(p);
 			}
 		} catch (Exception e) {
@@ -519,15 +529,17 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 		try (Connection con = ConnectionUtil.getConnect();
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {
-
 			while (rs.next()) {
 				String user_name = rs.getString("user_name");
 				Date dob = rs.getDate("d_o_b");
 				String gender1 = rs.getString("gender");
 				String religion = rs.getString("religion");
+				String caste = rs.getString("caste");
 				String country = rs.getString("country");
 				String state = rs.getString("states");
 				String city = rs.getString("city");
+				Long mobNo = rs.getLong("mob_no");
+				String pic= rs.getString("pic");
 				Long aadharNo = rs.getLong("aadhar_no");
 				String mail = rs.getString("mail_id");
 				int height1 = rs.getInt("height");
@@ -540,9 +552,11 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				p.setDob(dob);
 				p.setGender(gender1);
 				p.setReligion(religion);
+				p.setCaste(caste);
 				p.setCountry(country);
 				p.setState(state);
 				p.setCity(city);
+				p.setMobNo(mobNo);
 				p.setAadharNo(aadharNo);
 				p.setMail(mail);
 				p.setHeight(height1);
@@ -550,6 +564,7 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				p.setOccupation(occupation1);
 				p.setSalary(salary1);
 				p.setMaritalSts(marital_sts);
+				p.setPic(pic);
 				list.add(p);
 			}
 		} catch (Exception e) {

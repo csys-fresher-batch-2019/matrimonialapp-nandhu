@@ -31,7 +31,7 @@ public class MembershipPlanImpl implements MembershipPlanInterfaceDAO {
 	}
 
 	public String toString1() {
-		return "MembershipPlan [membershipType=" + membershipType + ", totalMonths=" + totalMonths + ", amount="
+		return "MembershipPlan [planId=" + planId + ",membershipType=" + membershipType + ", totalMonths=" + totalMonths + ", amount="
 				+ amount + "]";
 	}
 
@@ -46,10 +46,12 @@ public class MembershipPlanImpl implements MembershipPlanInterfaceDAO {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {
 			while (rs.next()) {
+				planId=rs.getInt("plan_id");
 				membershipType = rs.getString("membership_type");
 				totalMonths = rs.getInt("total_months");
 				amount = rs.getInt("amount");
 				MembershipPlanImpl m = new MembershipPlanImpl();
+				m.setPlanId(planId);
 				m.setMembershipType(membershipType);
 				m.setTotalMonths(totalMonths);
 				m.setAmount(amount);
