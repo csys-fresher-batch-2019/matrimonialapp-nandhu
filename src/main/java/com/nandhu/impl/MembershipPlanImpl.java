@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import com.nandhu.dao.MembershipPlanInterfaceDAO;
 import com.nandhu.util.ConnectionUtil;
 
 public class MembershipPlanImpl implements MembershipPlanInterfaceDAO {
-	@SuppressWarnings("unused")
 	private static final Logger LOGGER = Logger.getInstance();
 	private int planId;
 	private String membershipType;
