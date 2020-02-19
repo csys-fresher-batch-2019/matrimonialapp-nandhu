@@ -18,6 +18,8 @@ public class UpdateProfiles {
 		Logger.debug("Enter MOb_No:");
 		Long mobNo=s.nextLong();
 		s.nextLine();
+		Logger.debug("Enter Mail:");
+		String mail=s.nextLine();
 		Logger.debug("Enter Occupation:");
 		String occupation=s.nextLine();
 		Logger.debug("Enter Salary:");

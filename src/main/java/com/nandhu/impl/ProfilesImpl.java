@@ -266,7 +266,7 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 	// Display user details for particular user
 	public List<ProfilesImpl> getProfile(String userName) {
 		List<ProfilesImpl> list = new ArrayList<ProfilesImpl>();
-		String sql = "select * from profiles where user_name='" + userName + "' and active=" + active;
+		String sql = "select * from profiles where lower(user_name)=lower('" + userName + "') and active=" + active;
 		try (Connection con = ConnectionUtil.getConnect();
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {
@@ -353,6 +353,9 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				String occupation = rs.getString("occupation");
 				int salary = rs.getInt("salary");
 				String marital_sts = rs.getString("marital_sts");
+				  String pic=rs.getString("pic");
+					Long mobNo=rs.getLong("mob_no");
+					String caste=rs.getString("caste");
 				ProfilesImpl p = new ProfilesImpl();
 				p.setUserName(user_name);
 				p.setDob(dob);
@@ -368,6 +371,9 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				p.setOccupation(occupation);
 				p.setSalary(salary);
 				p.setMaritalSts(marital_sts);
+				p.setCaste(caste);
+				p.setPic(pic);
+				p.setMobNo(mobNo);
 				list.add(p);
 
 			}
@@ -379,7 +385,7 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 
 	public List<ProfilesImpl> getCityProfile(String gender, String city) {
 		List<ProfilesImpl> list = new ArrayList<ProfilesImpl>();
-		String sql = "select * from profiles where gender='" + gender + "' and city='" + city + "' and active="
+		String sql = "select * from profiles where gender='" + gender + "' and lower(city)=lower('" + city + "') and active="
 				+ active;
 
 		try (Connection con = ConnectionUtil.getConnect();
@@ -404,8 +410,10 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				String occupation = rs.getString("occupation");
 				int salary = rs.getInt("salary");
 				String marital_sts = rs.getString("marital_sts");
+				String pic1=rs.getString("pic");
 				ProfilesImpl p = new ProfilesImpl();
 				p.setUserName(user_name);
+				p.setPic(pic1);
 				p.setDob(dob);
 				p.setGender(gender1);
 				p.setReligion(religion);
@@ -421,7 +429,7 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				p.setOccupation(occupation);
 				p.setSalary(salary);
 				p.setMaritalSts(marital_sts);
-				p.setPic(pic);
+				p.setPic(pic1);
 				list.add(p);
 			}
 		} catch (Exception e) {
@@ -435,8 +443,10 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 		String sql = "select * from profiles where height >=" + height + " and gender='" + gender + "'and active="
 				+ active;
 		try (Connection con = ConnectionUtil.getConnect();
-				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery(sql)) {
+				Statement stmt = con.createStatement())
+				{
+			try(ResultSet rs = stmt.executeQuery(sql))
+			{
 			while (rs.next()) {
 				String user_name = rs.getString("user_name");
 				Date dob = rs.getDate("d_o_b");
@@ -452,7 +462,13 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				String occupation = rs.getString("occupation");
 				int salary = rs.getInt("salary");
 				String marital_sts = rs.getString("marital_sts");
+				 String pic=rs.getString("pic");
+					Long mobNo=rs.getLong("mob_no");
+					String caste=rs.getString("caste");
 				ProfilesImpl p = new ProfilesImpl();
+				p.setCaste(caste);
+				p.setPic(pic);
+				p.setMobNo(mobNo);
 				p.setUserName(user_name);
 				p.setDob(dob);
 				p.setGender(gender1);
@@ -469,8 +485,14 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				p.setMaritalSts(marital_sts);
 				list.add(p);
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+				}
+		catch(Exception e)
+		{
+			
 		}
 		return list;
 	}
@@ -497,7 +519,13 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				String occupation = rs.getString("occupation");
 				int salary1 = rs.getInt("salary");
 				String marital_sts = rs.getString("marital_sts");
+				   String pic=rs.getString("pic");
+					Long mobNo=rs.getLong("mob_no");
+					String caste=rs.getString("caste");
 				ProfilesImpl p = new ProfilesImpl();
+				p.setCaste(caste);
+				p.setPic(pic);
+				p.setMobNo(mobNo);
 				p.setUserName(user_name);
 				p.setDob(dob);
 				p.setGender(gender1);
@@ -524,8 +552,8 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 
 	public List<ProfilesImpl> getOccupation(String gender, String occupation) {
 		List<ProfilesImpl> list = new ArrayList<ProfilesImpl>();
-		String sql = "select * from profiles where gender='" + gender + "' and occupation ='" + occupation
-				+ "' and active=" + active;
+		String sql = "select * from profiles where gender='" + gender + "' and lower(occupation) =lower('" + occupation
+				+ "') and active=" + active;
 		try (Connection con = ConnectionUtil.getConnect();
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {
@@ -547,8 +575,10 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				String occupation1 = rs.getString("occupation");
 				int salary1 = rs.getInt("salary");
 				String marital_sts = rs.getString("marital_sts");
+				  String pic1=rs.getString("pic");
 				ProfilesImpl p = new ProfilesImpl();
 				p.setUserName(user_name);
+				p.setPic(pic1);
 				p.setDob(dob);
 				p.setGender(gender1);
 				p.setReligion(religion);
@@ -564,7 +594,7 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				p.setOccupation(occupation1);
 				p.setSalary(salary1);
 				p.setMaritalSts(marital_sts);
-				p.setPic(pic);
+				p.setPic(pic1);
 				list.add(p);
 			}
 		} catch (Exception e) {
@@ -575,8 +605,8 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 
 	public List<ProfilesImpl> getNotInOccupation(String gender, String occupation) {
 		List<ProfilesImpl> list = new ArrayList<ProfilesImpl>();
-		String sql = "select * from profiles where gender='" + gender + "' and occupation not in '" + occupation
-				+ "' and active=" + active;
+		String sql = "select * from profiles where gender='" + gender + "' and lower(occupation) not in lower('" + occupation
+				+ "') and active=" + active;
 		try (Connection con = ConnectionUtil.getConnect();
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {
@@ -596,6 +626,8 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				String occupation1 = rs.getString("occupation");
 				int salary1 = rs.getInt("salary");
 				String marital_sts = rs.getString("marital_sts");
+				  String pic=rs.getString("pic");
+					Long mobNo=rs.getLong("mob_no");
 				ProfilesImpl p = new ProfilesImpl();
 				p.setUserName(userName);
 				p.setDob(dob);
@@ -612,6 +644,8 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				p.setOccupation(occupation1);
 				p.setSalary(salary1);
 				p.setMaritalSts(marital_sts);
+				p.setPic(pic);
+				p.setMobNo(mobNo);
 				list.add(p);
 			}
 		} catch (Exception e) {
@@ -621,7 +655,7 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 	}
 	public List<ProfilesImpl> getAgeDetails() {
 		List<ProfilesImpl> list = new ArrayList<ProfilesImpl>();
-		String sql = "select user_name,extract(year from sysdate)-extract(year from d_o_b)as Age,marital_sts from profiles";
+		String sql = "select lower(user_name),extract(year from sysdate)-extract(year from d_o_b)as Age,lower(marital_sts) from profiles";
 		try (Connection con = ConnectionUtil.getConnect();
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {
@@ -684,11 +718,13 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 		}
 	}
 
-	public void updateProfiles(String occupation, int salary, String userName, Long mobNo) {
+	public void updateProfiles(String occupation, int salary, String userName,Long mobNo) {
 		try (Connection con = ConnectionUtil.getConnect(); Statement stmt = con.createStatement()) {
 
-			String sql = "update profiles set occupation='" + occupation + "',salary=" + salary + " where user_name='"
-					+ userName + "' and mob_no=" + mobNo;
+			//String sql1 = "update profiles set occupation='" + occupation + "',salary=" + salary + " where user_name='"
+			//		+ userName + "' and mail_id='" + mail + "' and mob_no=" + mobNo;
+			String sql="update profiles set occupation='"+occupation+"',salary="+salary+" where user_name='"+userName+"' and  mob_no="+mobNo;
+
 			int row = stmt.executeUpdate(sql);
 			Logger.debug(row);
 			Logger.debug("Updated Success");
@@ -713,7 +749,7 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 
 	public List<ProfilesImpl> getReligion(String gender, String religion) {
 		List<ProfilesImpl> list = new ArrayList<ProfilesImpl>();
-		String sql = "select * from profiles where gender='" + gender + "' and religion='" + religion + "' and active="
+		String sql = "select * from profiles where gender='" + gender + "' and lower(religion)=lower('" + religion + "') and active="
 				+ active;
 		try (Connection con = ConnectionUtil.getConnect();
 				Statement stmt = con.createStatement();
@@ -733,7 +769,13 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				String occupation = rs.getString("occupation");
 				int salary = rs.getInt("salary");
 				String marital_sts = rs.getString("marital_sts");
+				  String pic=rs.getString("pic");
+					Long mobNo=rs.getLong("mob_no");
+					String caste=rs.getString("caste");
 				ProfilesImpl p = new ProfilesImpl();
+				p.setCaste(caste);
+				p.setPic(pic);
+				p.setMobNo(mobNo);
 				p.setUserName(user_name);
 				p.setAge(age);
 				p.setGender(gender1);

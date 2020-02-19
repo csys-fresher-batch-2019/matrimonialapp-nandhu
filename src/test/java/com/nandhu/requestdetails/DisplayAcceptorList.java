@@ -14,7 +14,6 @@ public class DisplayAcceptorList {
 		RequestStatusImpl rs=new RequestStatusImpl();
 		@SuppressWarnings("resource")
 		Scanner s=new Scanner(System.in);
-		
 		Logger.debug("Enter Acceptor Mail ID=");
 		String acceptor=s.nextLine();
 		List<RequestStatusImpl> list = rs.getAcceptorList(acceptor);
