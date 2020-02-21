@@ -157,8 +157,7 @@ public class MembershipDurationImpl implements MembershipDurationDAO {
 	public List<MembershipDurationImpl> getRemainingDays(int userId) {
 		List<MembershipDurationImpl> list = new ArrayList<MembershipDurationImpl>();
 		String sql = "select user_name,((select expiry_date from membership_duration where md_user_id=" + userId
-				+ ")-(select registerd_date from profiles where user_id=" + userId
-				+ "))as remaining_days	from profiles where user_id=" + userId;
+				+ ")-(sysdate))as remaining_days	from profiles where user_id=" + userId;
 		try (Connection con = ConnectionUtil.getConnect();
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {

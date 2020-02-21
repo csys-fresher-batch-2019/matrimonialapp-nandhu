@@ -70,9 +70,6 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				+ ", maritalSts=" + maritalSts + ", occupation=" + occupation + ", salary=" + salary
 				+ ", membershipType=" + membershipType + ", pic=" + pic + "]";
 	}
-
-	
-
 	@Override
 	public String toString() {
 		return "ProfilesImpl [userId=" + userId + ", userName=" + userName + ", dob=" + dob
@@ -82,7 +79,6 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				+ ", maritalSts=" + maritalSts + ", occupation=" + occupation + ", salary=" + salary
 				+ ", membershipType=" + membershipType + ",active=" + active + ",pass="+pass+", pic=" + pic + "]";
 	}
-
 	public String getUserName() {
 		return userName;
 	}
@@ -90,7 +86,6 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
 	public Date getDob() {
 		return dob;
 	}
@@ -262,8 +257,6 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 	public void setAge(int age) {
 		this.age = age;
 	}
-
-	// Display user details for particular user
 	public List<ProfilesImpl> getProfile(String userName) {
 		List<ProfilesImpl> list = new ArrayList<ProfilesImpl>();
 		String sql = "select * from profiles where lower(user_name)=lower('" + userName + "') and active=" + active;
