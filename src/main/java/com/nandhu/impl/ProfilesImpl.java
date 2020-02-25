@@ -1,7 +1,6 @@
 package com.nandhu.impl;
 
 import com.nandhu.dao.ProfilesInterfaceDAO;
-import com.nandhu.impl.ProfilesImpl;
 import com.nandhu.util.ConnectionUtil;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -386,7 +385,7 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				ResultSet rs = stmt.executeQuery(sql)) {
 
 			while (rs.next()) {
-				String pic=rs.getString("pic");
+				
 				String user_name = rs.getString("user_name");
 				Date dob = rs.getDate("d_o_b");
 				String gender1 = rs.getString("gender");
@@ -406,7 +405,6 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				String pic1=rs.getString("pic");
 				ProfilesImpl p = new ProfilesImpl();
 				p.setUserName(user_name);
-				p.setPic(pic1);
 				p.setDob(dob);
 				p.setGender(gender1);
 				p.setReligion(religion);
@@ -560,7 +558,6 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 				String state = rs.getString("states");
 				String city = rs.getString("city");
 				Long mobNo = rs.getLong("mob_no");
-				String pic= rs.getString("pic");
 				Long aadharNo = rs.getLong("aadhar_no");
 				String mail = rs.getString("mail_id");
 				int height1 = rs.getInt("height");
@@ -711,20 +708,25 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 		}
 	}
 
-	public void updateProfiles(String occupation, int salary, String userName,Long mobNo) {
+	public String updateProfiles(String occupation, int salary, String userName,Long mobNo) {
 		try (Connection con = ConnectionUtil.getConnect(); Statement stmt = con.createStatement()) {
 
-			//String sql1 = "update profiles set occupation='" + occupation + "',salary=" + salary + " where user_name='"
-			//		+ userName + "' and mail_id='" + mail + "' and mob_no=" + mobNo;
 			String sql="update profiles set occupation='"+occupation+"',salary="+salary+" where user_name='"+userName+"' and  mob_no="+mobNo;
-
+String msg=null;
 			int row = stmt.executeUpdate(sql);
 			Logger.debug(row);
+			if(row==1) {
 			Logger.debug("Updated Success");
-
+			msg="success";
+			}
+			else
+			{
+				Logger.debug("Update Fail");
+				msg="fail";	
+			}return msg;
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}return null;
 	}
 
 	public void updateActive(int userId, int active) {
@@ -767,10 +769,10 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 					String caste=rs.getString("caste");
 				ProfilesImpl p = new ProfilesImpl();
 				p.setCaste(caste);
+				p.setDob(dob);
 				p.setPic(pic);
 				p.setMobNo(mobNo);
 				p.setUserName(user_name);
-				p.setAge(age);
 				p.setGender(gender1);
 				p.setReligion(religion1);
 				p.setCountry(country);
@@ -877,20 +879,25 @@ public class ProfilesImpl implements ProfilesInterfaceDAO {
 
 	}
 
-	public void changePassword(String userEmail, String pass, String userpassword) {
+	public String changePassword(String userEmail, String pass, String userpassword) {
+		String msg = null;
 		try (Connection con = ConnectionUtil.getConnect(); Statement stmt = con.createStatement()) {
 			String sql = "update profiles set pass='" + userpassword + "' where mail_id='" + userEmail + "' and pass='"
 					+ pass + "'";
+			
 			int row = stmt.executeUpdate(sql);
 			Logger.debug(row);
 			if (row == 1) {
 				Logger.debug("Updated Success");
+				msg="success";
 			} else {
 				Logger.debug("Invalid EmailId/Password");
-			}
+				msg="fail";
+			}return msg;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 
 	}
 

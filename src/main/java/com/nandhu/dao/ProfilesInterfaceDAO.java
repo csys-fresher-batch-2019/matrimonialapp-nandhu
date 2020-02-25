@@ -9,7 +9,7 @@ public interface ProfilesInterfaceDAO {
 	
 	public List<ProfilesImpl> getProfile(String userName);
 	
-	public void changePassword(String userEmail,String pass,String userpassword);
+	public String changePassword(String userEmail,String pass,String userpassword);
 
 	public List<ProfilesImpl> getGenderProfile(String gender);
 	
@@ -27,7 +27,7 @@ public interface ProfilesInterfaceDAO {
 	
 	public void delete(int id);
 	
-	public void updateProfiles(String occupation,int salary,String userName,Long mobNo);
+	public String updateProfiles(String occupation,int salary,String userName,Long mobNo);
 
 	public void updateActive(int userId,int active);
 	

@@ -130,7 +130,7 @@ public class MembershipDurationImpl implements MembershipDurationDAO {
 	}
 
 	public void saveMembershipDurationDetails(MembershipDurationImpl md) {
-		String sql = "insert into membership_duration(member_id,md_user_id,md_plan_id)values(m_id_sq.nextval,?,?)";
+		String sql = "insert into membership_duration(member_id,md_user_id,md_plan_id)values(memb_id_sq.nextval,?,?)";
 		try (Connection con = ConnectionUtil.getConnect(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, md.getMdUserId());
 			ps.setInt(2, md.getMdPlanId());
